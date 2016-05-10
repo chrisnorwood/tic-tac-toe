@@ -1,8 +1,7 @@
 require_relative 'player'
-require_relative 'cell'
 
 class Board
-  attr_accessor :board
+  attr_reader :board
 
   def initialize
     # Creates 3 item/row array, of 3 column values
@@ -20,10 +19,10 @@ class Board
       row.each_with_index do |cell, c|
         # Prints blank cell if no mark defined
         print cell.empty? ? "   " : cell
-        # Only prints "|"" twice per line
+        # Prints "|"" if index is not last
         print "|" unless c == 2
       end
-      # Prints divider line, twice total
+      # Prints divider line if index is not last
       print "\n---|---|---\n" unless r == 2
     end
   end
