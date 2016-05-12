@@ -13,7 +13,7 @@ class Board
     ]
   end
 
-  def print_board
+  def render
     # Iterates through each cell on board
     @board.each_with_index do |row, r|
       row.each_with_index do |cell, c|
@@ -25,5 +25,40 @@ class Board
       # Prints divider line if index is not last
       print "\n---|---|---\n" unless r == 2
     end
+    print "\n"
   end
+
+  def parse number
+    # ghetto jank for moment
+    case number
+    when 1
+      @board[0][0]
+    when 2
+      @board[0][1]
+    when 3
+      @board[0][2]
+    when 4
+      @board[1][0]
+    when 5
+      @board[1][1]
+    when 6
+      @board[1][2]
+    when 7
+      @board[2][0]
+    when 8
+      @board[2][1]
+    when 9
+      @board[2][2]
+    else
+      false
+    end  
+  end
+
+  def move player, input
+    board.parse(input) = player.mark
+    
+    #cell = player.mark
+    render
+  end
+
 end
