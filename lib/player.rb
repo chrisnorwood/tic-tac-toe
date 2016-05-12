@@ -8,19 +8,23 @@ class Player
     @mark = mark
   end
 
-  def request
-    puts "Enter an number 1-9, corresponding to a phone keypad."
+  # Takes board object as parameter, in order to validate input against
+  # board possibilities
+  def request(board)
+    puts "#{name}, enter a number 1-9:"
     
-    # Validates input
-    begin
-      move = gets.chomp
-      exit if move == 'exit'
+    move = gets.chomp
+    exit if move == "exit"
+    move = move.to_i
+    
+    if move.between?(1,9) && board.valid_move?(move)
+      return move
+    else
+      puts "Invalid selection"
       
-      move =~ /[1-9]/
-    rescue
-      puts "Invalid selection."
-      retry
+      # Recursion
+      request(board)
     end
-    move.to_i
   end
+
 end

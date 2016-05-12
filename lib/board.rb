@@ -4,61 +4,43 @@ class Board
   attr_reader :board
 
   def initialize
-    # Creates 3 item/row array, of 3 column values
-    # e.g. accessing bottom right as @board[3][3]
-    @board = [
-      ['','',''],
-      ['','',''],
-      ['','','']
-    ]
+    # Creates 9 value array; index 0-8 will correspond to user input 1-9
+    @board = Array.new(9, " ")
+
+    # array index values (input - 1)
+    @winning_combos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
   end
 
   def render
-    # Iterates through each cell on board
-    @board.each_with_index do |row, r|
-      row.each_with_index do |cell, c|
-        # Prints blank cell if no mark defined
-        print cell.empty? ? "   " : cell
-        # Prints "|"" if index is not last
-        print "|" unless c == 2
-      end
-      # Prints divider line if index is not last
-      print "\n---|---|---\n" unless r == 2
-    end
+    print " #{@board[0]} | #{@board[1]} | #{@board[2]} "
+    print "\n---|---|---\n"
+    print " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+    print "\n---|---|---\n"
+    print " #{@board[6]} | #{@board[7]} | #{@board[8]} "
     print "\n"
   end
 
   def parse number
-    # ghetto jank for moment
-    case number
-    when 1
-      @board[0][0]
-    when 2
-      @board[0][1]
-    when 3
-      @board[0][2]
-    when 4
-      @board[1][0]
-    when 5
-      @board[1][1]
-    when 6
-      @board[1][2]
-    when 7
-      @board[2][0]
-    when 8
-      @board[2][1]
-    when 9
-      @board[2][2]
-    else
-      false
-    end  
+     
   end
 
   def move player, input
-    board.parse(input) = player.mark
-    
-    #cell = player.mark
-    render
+    index = input - 1
+    mark = player.mark
+
+    @board[index] = mark
+  end
+
+  def won_by player
+    @winning_combos.any? do |line|
+      line.all? { |i| @board[i] == player.mark }
+    end
+  end
+
+  def valid_move?(input)
+    index = input - 1
+
+    @board[index] == " "
   end
 
 end
