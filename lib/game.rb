@@ -19,10 +19,10 @@ class Game
       @board.render
       player = @players[0]
 
-      # Collects user input, validates int. 1-9 and valid position on board
+      # Collects user input, validates int. 1-9 and valid position on board,
+      # then writes input into board array
       input = player.request(@board)
-
-      @board.move(player, input)    # checks win and/or moves on board.
+      @board.move(player, input)
       
       if @board.won_by(player)
         @board.render
