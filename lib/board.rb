@@ -1,7 +1,7 @@
 require_relative 'player'
 
 class Board
-  attr_reader :board
+  attr_accessor :board
 
   def initialize
     # Creates 9 value array; index 0-8 will correspond to user input 1-9

@@ -7,13 +7,13 @@ class Game
   def initialize
     @game_over = false
     @board = Board.new
-  end
-
-  def play
     @players = [
       Player.new('Player 1', 'X'),
       Player.new('Player 2', 'O')
     ]
+  end
+
+  def play
 
     until @game_over
       @board.render
